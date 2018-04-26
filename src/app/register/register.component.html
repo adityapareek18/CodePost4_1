@@ -1,0 +1,43 @@
+<div class="body-blur">
+  <div class="row columns">
+    <h1>Register User</h1>
+  </div>
+
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)">
+    <div class="row">
+      <div class="columns small-12 medium-6">
+        <label>First Name
+          <input type="text" name="First Name" [formControl]="registerForm.controls['firstName']">
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-12 medium-6">
+        <label>Last Name
+          <input type="text" name="Last Name" [formControl]="registerForm.controls['lastName']">
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-12 medium-6">
+        <label>Username
+          <input #username type="text" name="username" [formControl]="registerForm.controls['username']">
+        </label>
+        <div class="alert" *ngIf="usernameTaken(username.value)">Username already taken.</div>
+        <div class="alert" *ngIf="!registerForm.controls['username'].valid && registerForm.controls['username'].touched">You must specify a username.</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-12 medium-6">
+        <label>Password
+          <input type="password" name="password" [formControl]="registerForm.controls['password']">
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngIf="!usernameTaken(username.value)" class="columns small-12 medium-6">
+        <input type="submit" class="cta-btn filled" value="Create">
+      </div>
+    </div>
+  </form>
+</div>

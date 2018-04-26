@@ -1,0 +1,30 @@
+
+<div class="body-blur">
+    <div class="row columns">
+      <h1>Login</h1>
+    </div>
+  
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+      <div class="row">
+        <div class="columns small-12 medium-6">
+          <label>Username
+            <input type="text" name="username" [formControl]="loginForm.controls['username']">
+          </label>
+        </div>
+      </div>
+      <div class="row">
+          <div class="columns small-12 medium-6">
+          <label>Password
+            <input type="text" name="password" [formControl]="loginForm.controls['password']">
+          </label>
+        </div>
+       </div>
+       <div class="row">
+        <div class="columns small-12 medium-6">
+          <input type="submit" class="cta-btn filled" value="Login">
+      </div>
+     </div>
+    </form>
+  </div>
+  
+  
