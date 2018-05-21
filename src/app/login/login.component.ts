@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition} from '../animations';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../user';
 
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit{
     users: Array<User>;
     user: User;
 
-    constructor(private _userService: UserService, fb: FormBuilder, private router: Router) {
+    constructor(private _userService: UserService, private _authService: AuthService, fb: FormBuilder, private router: Router) {
 
         this.loginForm = fb.group({
           'username' : [null, Validators.required],
@@ -35,21 +36,14 @@ export class LoginComponent implements OnInit{
     }
 
     loginUser(user: User) {
-        this._userService.loginUser(user)
+        this._authService.loginUser(user)
             .subscribe(res => {
-               if(res.status == 401) {
-                   console.log("User Not Found");
-               }
-               else if(res.status == 200) {
-                   localStorage.setItem("LoggedinUser", user._id);
-                console.log("Login Successfull");
                 this.router.navigateByUrl('home');
-               }
             })
     }
 
     logoutUser() {
-        
+         this._authService.logout();
     }
 
 }

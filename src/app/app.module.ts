@@ -17,7 +17,8 @@ import { UserPostComponent } from './userPosts/userPosts.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './services/user.service';
-import { AuthenticationService } from './services/auth.service';
+import { AuthService } from './services/auth.service';
+import { LoggedInUsersGuard } from './guards/LoggedInUsersGuard';
 
 @NgModule({
   declarations: [
@@ -37,9 +38,9 @@ import { AuthenticationService } from './services/auth.service';
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [PostService, UserService, AuthenticationService],
+  providers: [PostService, UserService, AuthService, LoggedInUsersGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

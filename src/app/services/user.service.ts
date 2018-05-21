@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { User } from '../user';
+import * as moment from '../../../node_modules/moment';
 
 @Injectable()
 export class UserService {
@@ -18,9 +19,5 @@ export class UserService {
         let options = new RequestOptions({ headers: headers });
         return this._http.post('/api/users', JSON.stringify(user), options)
             .map(user => this.result = user.json());
-    }
-
-    loginUser(user: User) {
-        return this._http.get("/authenticate"+user);
     }
 }

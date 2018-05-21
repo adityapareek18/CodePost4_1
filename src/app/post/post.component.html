@@ -12,17 +12,11 @@
         </label>
         <div class="alert" *ngIf="!postForm.controls['title'].valid && postForm.controls['title'].touched">You must specify a title that's at least 15 characters long.</div>
       </div>
-      <!-- <div class="columns small-12 medium-6">
-        <label>URL
-          <input type="text" name="url" [formControl]="postForm.controls['url']">
-        </label>
-        <div class="alert" *ngIf="!postForm.controls['url'].valid && postForm.controls['url'].touched">You must specify a URL.</div>
-      </div> -->
     </div>
 	<div class="row">
 		<div class="columns small-12 medium-6">
         <label>Date
-          <input type="date" name="startDate" [formControl]="postForm.controls['startDate']">
+          <input type="date" name="startDate" [formControl]="postForm.controls['startDate']"> 
         </label>
         <div class="alert" *ngIf="!postForm.controls['startDate'].valid && postForm.controls['startDate'].touched">You must specify a Start Time.</div>
       </div>

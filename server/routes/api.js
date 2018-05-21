@@ -6,8 +6,7 @@ const user = require('../models/user');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
-
+const expressJwt = require('express-jwt');
 
 const db = "mongodb://localhost:27017/codepostnet";
 
@@ -89,6 +88,7 @@ router.post('/users', function (req, res) {
             console.log('Error creating the user');
         } else {
             res.json(createdUser);
+            console.log('Registration Successful');
         }
     });
 });
@@ -106,29 +106,22 @@ router.get('/users', function (req, res) {
 });
 
 router.get('/authenticate', function (req, res) {
+    console.log(req.body.username + " " + req.body.password);
     user.findOne({
         username: req.body.username
     }).exec(function (err, foundUser) {
         if (err) {
+            res.status(404);
             console.log('Error getting the users');
         } else if (!foundUser) {
             res.status(401).json({ message: 'User Not Found' });
         } else if (foundUser) {
             if (foundUser.comparePassword(req.body.password)) {
-                res.status(200).json({ token: jwt.sign({ username: user.username, firstName: user.firstName, _id: user._id }, 'RESTFULAPIs') });
+                res.status(200).json({ token: jwt.sign({_id: _id}, 'RESTFULAPIs') });
             }
         }
     });
 });
-
-exports.loginRequired = function (req, res, next) {
-    if (req.user) {
-        next();
-    } else {
-        return res.status(401).json({ message: 'Unauthorized User!' });
-    }
-
-}
 
 router.delete('/posts/:id', function (req, res) {
     console.log('Deleting a post');

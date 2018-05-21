@@ -4,7 +4,6 @@ import { Post } from '../post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { routerTransition } from '../animations';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-post',
