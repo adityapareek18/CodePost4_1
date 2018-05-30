@@ -15,6 +15,11 @@ export class PostService {
       .map(result => this.result = result.json());
   }
 
+  getPostsByUserId(userId) {
+    return this._http.get("/api/posts/"+userId)
+      .map(result => this.result = result.json());
+  }
+
   getPost(id) {
     return this._http.get("/api/details/"+id)
       .map(result => this.result = result.json());

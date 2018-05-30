@@ -29,6 +29,20 @@ router.get('/posts', function (req, res) {
         });
 });
 
+router.get('/posts/:userId', function (req, res) {
+    console.log('Requesting posts');
+    post.find({
+        userId: req.params.userId
+    }).exec(function (err, posts) {
+            if (err) {
+                console.log('Error getting the posts');
+            } else {
+                res.json(posts);
+            }
+        });
+});
+
+
 router.get('/details/:id', function (req, res) {
     console.log('Requesting post');
     post.findById(req.params.id)
@@ -44,23 +58,7 @@ router.get('/details/:id', function (req, res) {
 router.post('/posts', function (req, res) {
     console.log('Posting a post');
     var newPost = new post();
-    newPost.title = req.body.title;
-    newPost.description = req.body.description;
-    newPost.startDate = req.body.startDate;
-    newPost.startTime = req.body.startTime;
-    newPost.endTime = req.body.endTime;
-    newPost.save(function (err, addedPost) {
-        if (err) {
-            console.log('Error inserting the post');
-        } else {
-            res.json(addedPost);
-        }
-    });
-});
-
-router.post('/posts', function (req, res) {
-    console.log('Posting a post');
-    var newPost = new post();
+    newPost.userId = req.body.userId;
     newPost.title = req.body.title;
     newPost.description = req.body.description;
     newPost.startDate = req.body.startDate;
@@ -105,7 +103,7 @@ router.get('/users', function (req, res) {
         });
 });
 
-router.get('/authenticate', function (req, res) {
+router.post('/authenticate', function (req, res) {
     console.log(req.body.username + " " + req.body.password);
     user.findOne({
         username: req.body.username
@@ -117,7 +115,17 @@ router.get('/authenticate', function (req, res) {
             res.status(401).json({ message: 'User Not Found' });
         } else if (foundUser) {
             if (foundUser.comparePassword(req.body.password)) {
-                res.status(200).json({ token: jwt.sign({_id: _id}, 'RESTFULAPIs') });
+                const payload = {
+                    _id: foundUser._id 
+                  };
+                var token = jwt.sign(payload, 'RESTFULAPIs', {
+                    expiresIn: 1440
+                  });
+                res.status(200).json({
+                    success: true,
+                    message: 'Enjoy your token!',
+                    token: token
+                  });
             }
         }
     });

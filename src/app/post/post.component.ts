@@ -4,6 +4,7 @@ import { Post } from '../post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { routerTransition } from '../animations';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -17,7 +18,7 @@ export class PostComponent implements OnInit {
   posts: Array<Post>;
   postForm: FormGroup;
 
-  constructor(private _postService: PostService, fb: FormBuilder, private router: Router) { 
+  constructor(private _postService: PostService, private _authService: AuthService, fb: FormBuilder, private router: Router) { 
 
     this.postForm = fb.group({
       'title' : [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(75)])],
@@ -35,6 +36,7 @@ export class PostComponent implements OnInit {
   }
 
   addPost(post: Post) {
+    post.userId = this._authService.getLoggedInUserId();
     this._postService.insertPost(post)
       .subscribe(newPost => {
         this.posts.push(newPost);
