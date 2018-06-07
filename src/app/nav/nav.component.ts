@@ -14,11 +14,14 @@ export class NavComponent implements OnInit {
   constructor(private _userService: UserService, private _authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-  	let loggedInUserId = localStorage.getItem('id_token');
+  }
+  
+  isLoggedIn(){
+	let loggedInUserId = localStorage.getItem('id_token');
   	if(loggedInUserId)
-  		this.userLoggedIn = true;
+  		return true;
   	else
-  		this.userLoggedIn = false;
+		return false;
   }
 
   logout(){

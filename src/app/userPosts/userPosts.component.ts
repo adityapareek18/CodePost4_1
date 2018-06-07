@@ -13,15 +13,18 @@ import { User } from '../user';
   animations: [routerTransition],
   host: {'[@routerTransition]': ''}
 })
-export class UserPostComponent {
+export class UserPostComponent implements OnInit{
 
   registerForm: FormGroup;
 
-  constructor(private _userService: UserService, fb: FormBuilder, private router: Router) { 
-
+  constructor(private _userService: UserService, fb: FormBuilder, private router: Router) {
     this.registerForm = fb.group({
       'username' : [null, Validators.required],
       'password' : [null, Validators.required]
       });
+  }
+  
+  ngOnInit() {
+    localStorage.clear();    
   }
 }

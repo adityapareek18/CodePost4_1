@@ -30,10 +30,11 @@ export class LoginComponent implements OnInit{
     }
 
     ngOnInit() {
+		localStorage.clear();    
         this._userService.getUsers()
             .subscribe(res => {
                 this.users = res;
-            })
+            });
     }
 
     loginUser(user: User) {
