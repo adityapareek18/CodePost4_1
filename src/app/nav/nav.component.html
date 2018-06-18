@@ -4,17 +4,17 @@
     <a routerLink="/"><img src="/assets/images/logo.svg" id="logo"></a>
   </div>
   <div class="columns small-12 medium-5"></div>
-  <div *ngIf="!userLoggedIn" class="columns small-12 medium-1">
+  <div class="columns small-12 medium-1">
       <a routerLink="register" class="cta-btn">Register</a>
   </div>
 
-  <div *ngIf="!userLoggedIn" class="columns small-12 medium-1">
+  <div class="columns small-12 medium-1">
     <a routerLink="login" class="cta-btn">Login</a>
   </div>
-  <div *ngIf="userLoggedIn" class="columns small-12 medium-1">
+  <div class="columns small-12 medium-1">
     <a (click)="logout()" class="cta-btn">LogOut</a>
   </div>
-  <div *ngIf="userLoggedIn" class="columns small-12 medium-2">
+  <div class="columns small-12 medium-1">
     <a routerLink="post" class="cta-btn">Post Tutorial</a>
   </div>
 </div>

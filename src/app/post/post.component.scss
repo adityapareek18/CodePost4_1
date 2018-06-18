@@ -8,18 +8,11 @@ label {
     font-size:1.5em;
 }
 
-input[type='text'],textarea, input[type='time']{
+input[type='text'],textarea, input[type='time'], input[type='date']{
     background:none;
     border: 1px solid #617879;
     padding:22px 15px;
     color:$text-color;
-}
-
-ngx-datepicker {
-    background: none;
-    border: 1px solid #617879;
-    padding: 22px 15px;
-    color: #88949D;
 }
 
 textarea {

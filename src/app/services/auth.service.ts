@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { User } from '../user';
 import * as moment from '../../../node_modules/moment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
 
-    constructor(private _http: Http){}
+    constructor(private _http: HttpClient) { }
     result: any;
 
     loginUser(user: User) {
-        return this._http.post("/api/authenticate",{username :user.username, password: user.password});
+        return this._http.post("/api/authenticate", { username: user.username, password: user.password },
+            { observe: 'response' });
     }
 
     logout() {
@@ -31,7 +33,7 @@ export class AuthService {
         const expiration = localStorage.getItem("expires_at");
         const expiresAt = JSON.parse(expiration);
         return moment(expiresAt);
-    } 
+    }
 
     getLoggedInUserId() {
         var token = localStorage.getItem("id_token");

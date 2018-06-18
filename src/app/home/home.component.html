@@ -1,8 +1,8 @@
-<div class="row columns">
+<div *ngIf="posts.length !== 0" class="row columns">
   <h1>All Sessions</h1>
 </div>
 <div class="row">
-  <div class="columns small-12 medium-6 large-4 posts" *ngFor="let post of posts">
+  <div @delPost class="columns small-12 medium-6 large-4 posts" *ngFor="let post of posts">
     <div class="post-container">
       <div class="row">
         <div class="columns small-12 large-10">
@@ -36,4 +36,10 @@
       <a routerLink="/details/{{ post._id }}" class="cta-btn btn2">More Info</a>
     </div>
   </div>
+</div>
+<div class="row" *ngIf="posts.length == 0">
+  <h1>All Caught Up!</h1>
+</div>
+<div class="row" *ngIf="posts.length == 0">
+<h3>Start Sharing Knowledge - Post Tutorials</h3>
 </div>

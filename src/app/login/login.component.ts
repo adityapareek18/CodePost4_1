@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit{
 
     private setSession(authResult) {
         console.log('set session called');
-        var obj = JSON.parse(authResult.text());
+        var obj = authResult.body;
         const expiresAt = moment().add(obj.expiresIn,'second');
         localStorage.setItem('id_token', obj.token);
     }

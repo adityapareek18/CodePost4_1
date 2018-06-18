@@ -19,6 +19,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { LoggedInUsersGuard } from './guards/LoggedInUsersGuard';
+import { AuthInterceptor } from './interceptors/http.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,14 +37,20 @@ import { LoggedInUsersGuard } from './guards/LoggedInUsersGuard';
     UserPostComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgbModule.forRoot()
   ],
-  providers: [PostService, UserService, AuthService, LoggedInUsersGuard],
+  providers: [PostService, UserService, AuthService, LoggedInUsersGuard, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,7 +13,7 @@ import { routerTransition } from '../animations';
 })
 export class DetailsComponent implements OnInit {
 
-  post: Array<Post>;
+  post: Post;
 
   constructor(private _postService: PostService, private router: ActivatedRoute) { }
 
@@ -23,7 +23,7 @@ export class DetailsComponent implements OnInit {
       let id = params['id'];
 
       this._postService.getPost(id)
-        .subscribe(res=>this.post = res);
+        .subscribe(res => this.post = res);
         
     })
   }

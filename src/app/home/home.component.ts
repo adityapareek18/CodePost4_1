@@ -3,17 +3,18 @@ import { PostService } from '../post.service';
 import { AuthService } from '../services/auth.service';
 import { Post } from '../post';
 import { routerTransition } from '../animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  animations: [routerTransition],
+  animations:  routerTransition ,
   host: { '[@routerTransition]': ''}
 })
 export class HomeComponent implements OnInit {
 
-  posts: Array<Post>;
+  posts: Array<Post> = [];
 
   constructor(private _postService: PostService, private _authService: AuthService) { }
 
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   deletePost(post) {
     this._postService.deletePost(post._id)
       .subscribe(res => {
-        if (res.status == 200) {
+        if (JSON.parse(JSON.stringify(res)).status == 200) {
           var index = this.posts.indexOf(post, 0);
           if (index > -1)
             this.posts.splice(index, 1);

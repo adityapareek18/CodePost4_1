@@ -17,7 +17,7 @@ mongoose.connect(db, function (err) {
     }
 });
 
-router.get('/posts', function (req, res) {
+router.get('/posts', verifyToken, function (req, res) {
     console.log('Requesting posts');
     post.find({})
         .exec(function (err, posts) {
@@ -29,8 +29,12 @@ router.get('/posts', function (req, res) {
         });
 });
 
-router.get('/posts/:userId', function (req, res) {
-    console.log('Requesting posts');
+router.get('/posts/:userId', verifyToken, function (req, res) {
+    console.log('TOKENWA'+req.token);
+    jwt.verify(req.token, 'RESTFULAPIs', (err, authData) => {
+        if(err){res.sendStatus(403)}
+        else {
+            console.log('Requesting posts');
     post.find({
         userId: req.params.userId
     }).exec(function (err, posts) {
@@ -40,6 +44,8 @@ router.get('/posts/:userId', function (req, res) {
                 res.json(posts);
             }
         });
+        }
+    })
 });
 
 
@@ -109,8 +115,8 @@ router.post('/authenticate', function (req, res) {
         username: req.body.username
     }).exec(function (err, foundUser) {
         if (err) {
-            res.status(404);
             console.log('Error getting the users');
+            res.status(404);
         } else if (!foundUser) {
             res.status(401).json({ message: 'User Not Found' });
         } else if (foundUser) {
@@ -121,11 +127,12 @@ router.post('/authenticate', function (req, res) {
                 var token = jwt.sign(payload, 'RESTFULAPIs', {
                     expiresIn: 1440
                   });
-                res.status(200).json({
+                res.json({
                     success: true,
                     message: 'Enjoy your token!',
-                    token: token
-                  });
+                    token: token,
+                    status: 200
+                });
             }
         }
     });
@@ -139,10 +146,26 @@ router.delete('/posts/:id', function (req, res) {
         if (err) {
             console.log('Error deleting the users');
         } else if (post) {
-            res.status(200).json({ message: 'User Deleted' });
+            res.json({ message: 'User Deleted', status: 200 });
         }
     });
 });
+
+function verifyToken(req, res, next) {
+    const bearerHeader = req.headers['authorization'];
+    console.log(bearerHeader);    
+    
+    if(typeof bearerHeader !== 'undefined') {
+      const bearerToken = bearerHeader.split(' ')[1];
+      console.log('token is' +bearerToken);
+      req.token = bearerToken;
+      next();
+    }
+    else {
+      console.log('No Token');
+      res.status(403);
+    }
+  }
 
 
 
