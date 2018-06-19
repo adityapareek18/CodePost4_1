@@ -15,27 +15,21 @@
     <div class="row">
       <div class="columns small-12 medium-6">
         <label>Date
-          <input placeholder="yyyy-mm-dd" name="dp" [formControl]="postForm.controls['startDate']" ngbDatepicker
+          <input type="text" autoClose name="dp" (click)="d.toggle()" [formControl]="postForm.controls['startDate']" ngbDatepicker
             #d="ngbDatepicker">
-            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-              <img src="/assets/images/logo.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-            </button>
         </label>
-        <div class="alert" *ngIf="!postForm.controls['startDate'].valid && postForm.controls['startDate'].touched">You must specify a Start Time.</div>
       </div>
     </div>
     <div class="row">
-      <div class="columns small-12 medium-6">
+      <div class="columns small-12 medium-4">
         <label>Start Time
-          <input type="time" name="startTime" [formControl]="postForm.controls['startTime']">
+			<ngb-timepicker name="startTime" meridian="true" [formControl]="postForm.controls['startTime']"></ngb-timepicker>
         </label>
-        <div class="alert" *ngIf="!postForm.controls['startTime'].valid && postForm.controls['startTime'].touched">You must specify a Start Time.</div>
       </div>
-      <div class="columns small-12 medium-6">
+      <div class="columns small-12 medium-4">
         <label>End Time
-          <input type="time" name="title" [formControl]="postForm.controls['endTime']">
+         <ngb-timepicker name="endTime" meridian="true" [formControl]="postForm.controls['endTime']"></ngb-timepicker>
         </label>
-        <div class="alert" *ngIf="!postForm.controls['endTime'].valid && postForm.controls['endTime'].touched">You must specify an End Time.</div>
       </div>
     </div>
     <div class="row columns">
