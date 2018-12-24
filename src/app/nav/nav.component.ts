@@ -14,6 +14,7 @@ export class NavComponent implements OnInit {
   constructor(private _userService: UserService, private _authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+	this.userLoggedIn = this.isLoggedIn();
   }
   
   isLoggedIn(){

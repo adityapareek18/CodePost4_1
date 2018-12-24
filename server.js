@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
 const jwt = require('jsonwebtoken');
-const expressJwt = require('express-jwt');
 const app = express();
 
 const api = require('./server/routes/api');
@@ -30,5 +29,5 @@ app.set('port', port);
 // Create the HTTP Server
 const server = http.createServer(app);
 
-server.listen(port, () => console.log(`Running on localhost:${port}`));
+app.listen(port, () => console.log(`Running on localhost:${port}`));
 

@@ -1,43 +1,31 @@
-<div class="body-blur">
-  <div class="row columns">
+<div class="container">
+  <div class="page-header">
     <h1>Register User</h1>
   </div>
 
   <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)">
-    <div class="row">
-      <div class="columns small-12 medium-6">
-        <label>First Name
-          <input type="text" name="First Name" [formControl]="registerForm.controls['firstName']">
-        </label>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label">First Name</label>
+        <input type="text" class="col-md-4 form-control" name="First Name" [formControl]="registerForm.controls['firstName']" required/>
       </div>
-    </div>
-    <div class="row">
-      <div class="columns small-12 medium-6">
-        <label>Last Name
-          <input type="text" name="Last Name" [formControl]="registerForm.controls['lastName']">
-        </label>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label">Last Name</label>
+        <input type="text" class="col-md-4 form-control" name="Last Name" [formControl]="registerForm.controls['lastName']">
       </div>
-    </div>
-    <div class="row">
-      <div class="columns small-12 medium-6">
-        <label>Username
-          <input #username type="text" name="username" [formControl]="registerForm.controls['username']">
-        </label>
-        <div class="alert" *ngIf="usernameTaken(username.value)">Username already taken.</div>
-        <div class="alert" *ngIf="!registerForm.controls['username'].valid && registerForm.controls['username'].touched">You must specify a username.</div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label">Username</label>
+        <input type="text" class="col-md-4 form-control">
       </div>
-    </div>
-    <div class="row">
-      <div class="columns small-12 medium-6">
-        <label>Password
-          <input type="password" name="password" [formControl]="registerForm.controls['password']">
-        </label>
+        <!--<div class="col-md-4">
+          <small class="form-text text-muted" *ngIf="usernameTaken(username.value)">Username already taken.</small>
+          <small class="form-text text-muted" *ngIf="!registerForm.controls['username'].valid && registerForm.controls['username'].touched">You must specify a username.</small>
+        </div>-->
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label">Password</label>
+        <input type="password" class="col-md-4 form-control"  name="password" [formControl]="registerForm.controls['password']">
       </div>
-    </div>
-    <div class="row">
-      <div *ngIf="!usernameTaken(username.value)" class="columns small-12 medium-6">
-        <input type="submit" class="cta-btn filled" value="Create">
+      <div class="col-md-12">
+        <input type="submit" class="btn filled align-items-center" value="Create">
       </div>
-    </div>
   </form>
 </div>

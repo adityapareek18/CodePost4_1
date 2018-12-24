@@ -1,27 +1,21 @@
 
-<div class="body-blur">
-    <div class="row columns">
+<div class="container">
+    <div class="page-header">
       <h1>Login</h1>
     </div>
   
     <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
-      <div class="row">
-        <div class="columns small-12 medium-6">
-          <label>Username
-            <input type="text" name="username" [formControl]="loginForm.controls['username']">
-          </label>
-        </div>
+      <div class="form-group row">
+          <label class="col-md-2 col-form-label">Username</label>
+          <input type="text" class="col-md-4 form-control" name="username" [formControl]="loginForm.controls['username']">
       </div>
-      <div class="row">
-          <div class="columns small-12 medium-6">
-          <label>Password
-            <input type="password" name="password" [formControl]="loginForm.controls['password']">
-          </label>
-        </div>
+      <div class="form-group row">
+          <label class="col-md-2 col-form-label">Password</label>
+            <input type="password" class="col-md-4 form-control" name="password" [formControl]="loginForm.controls['password']">
        </div>
        <div class="row">
         <div class="columns small-12 medium-6">
-          <input type="submit" class="cta-btn filled" value="Login">
+          <input type="submit" class="btn filled" value="Login">
       </div>
      </div>
     </form>
