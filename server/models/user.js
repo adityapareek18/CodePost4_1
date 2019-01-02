@@ -7,7 +7,8 @@ const userSchema = new Schema({
     lastName: String,
     username: String,
     password: String,
-    created: Date
+    created: Date,
+    profileComplete: { type: Boolean, default: false}
 });
 
 userSchema.methods.comparePassword = function(password) {

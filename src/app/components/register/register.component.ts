@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { Post } from '../post';
+import { UserService } from '../../services/user.service';
+import { Post } from '../../post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { routerTransition } from '../animations';
-import { User } from '../user';
+import { routerTransition } from '../../animations';
+import { User } from '../../user';
 
 @Component({
   selector: 'app-register',

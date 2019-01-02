@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../post.service';
-import { AuthService } from '../services/auth.service';
-import { Post } from '../post';
-import { routerTransition } from '../animations';
+import { PostService } from '../../services/post.service';
+import { AuthService } from '../../services/auth.service';
+import { Post } from '../../post';
+import { routerTransition } from '../../animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

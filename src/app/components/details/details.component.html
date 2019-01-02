@@ -1,0 +1,27 @@
+
+<div *ngIf="post" class="container body-blur">
+
+  <div class="row">
+    <div class="col-sm-12 col-md-10">
+      <a routerLink="/home" id="back">Back</a>
+      <h1>{{ post.title }}</h1>
+    </div>
+    <div class="col-sm-12 col-md-2">
+      <a href="{{ post.url }}" id="external-btn">
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <p>{{ post.description }}</p>
+  </div>
+
+  <div class="row">
+    <p>{{ date | dateP }}</p>
+  </div>
+
+  <div class="row">
+    <p>Session will start at {{ post.startTime | timeP }}</p>
+    <p>&nbsp;and will end at {{ post.endTime | timeP}}</p>
+  </div>
+</div>

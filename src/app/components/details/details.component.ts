@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../post.service';
-import { Post } from '../post';
+import { PostService } from '../../services/post.service';
+import { Post } from '../../post';
 import { Router, ActivatedRoute } from '@angular/router';
-import { routerTransition } from '../animations';
+import { routerTransition } from '../../animations';
+import { Time } from '@angular/common';
+import { SessionDatePipe } from '../../pipes/date.pipe';
 
 @Component({
   selector: 'app-details',
@@ -14,6 +16,9 @@ import { routerTransition } from '../animations';
 export class DetailsComponent implements OnInit {
 
   post: Post;
+  date: Date;
+  startTime: Time;
+  endTime: Time;
 
   constructor(private _postService: PostService, private router: ActivatedRoute) { }
 
@@ -23,9 +28,12 @@ export class DetailsComponent implements OnInit {
       let id = params['id'];
 
       this._postService.getPost(id)
-        .subscribe(res => this.post = res);
+        .subscribe(res => {
+          this.post = res;
+          var date1: any = this.post.startDate;
+          this.date = new Date(date1.year, date1.month, date1.day);
+        });
         
     })
   }
-
 }

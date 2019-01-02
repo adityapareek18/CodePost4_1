@@ -5,9 +5,9 @@ const postSchema = new Schema({
     userId: String,
     title: String,
     url: String,
-    startDate: String,
-    startTime: String,
-    endTime: String,
+    startDate: { year: Number, month: Number, day: Number },
+    startTime: { hour: Number, minute: Number, second: Number },
+    endTime: { hour: Number, minute: Number, second: Number },
     description: String
 });
 

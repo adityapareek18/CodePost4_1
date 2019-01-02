@@ -5,16 +5,16 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PostService } from './post.service';
-import { NavComponent } from './nav/nav.component';
-import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
-import { DetailsComponent } from './details/details.component';
+import { PostService } from './services/post.service';
+import { NavComponent } from './components/nav/nav.component';
+import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { DetailsComponent } from './components/details/details.component';
 import { LengthPipe } from './length.pipe';
-import { PostComponent } from './post/post.component';
-import { LoginComponent } from './login/login.component';
-import { UserPostComponent } from './userPosts/userPosts.component';
-
+import { PostComponent } from './components/post/post.component';
+import { LoginComponent } from './components/login/login.component';
+import { UserPostComponent } from './components/userPosts/userPosts.component';
+import { SessionDatePipe } from '../app/pipes/date.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
@@ -23,6 +23,10 @@ import { AuthInterceptor } from './interceptors/http.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SessionTimePipe } from '../app/pipes/time.pipe';
+import { ProfileComponent } from './components/profile/profile.component';
+import { FillProfileComponent } from './components/fillProfile/fillProfile.component';
+
 
 @NgModule({
   declarations: [
@@ -32,9 +36,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     DetailsComponent,
     LengthPipe,
+    SessionDatePipe,
+    SessionTimePipe,
     PostComponent,
     LoginComponent,
-    UserPostComponent
+    UserPostComponent,
+    ProfileComponent,
+    FillProfileComponent
   ],
   imports: [
     HttpClientModule,

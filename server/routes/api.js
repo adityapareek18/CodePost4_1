@@ -72,6 +72,7 @@ router.post('/posts', function (req, res) {
     newPost.endTime = req.body.endTime;
     newPost.save(function (err, addedPost) {
         if (err) {
+            console.log(err);
             console.log('Error inserting the post');
         } else {
             res.json(addedPost);
@@ -108,6 +109,20 @@ router.get('/users', function (req, res) {
             }
         });
 });
+
+router.get('/users/:id', function (req, res) {
+    console.log('Requesting user with id');
+    user.findById(req.params.id)
+        .exec(function(err, user) {
+            if(err) {
+                console.log('Error getting user');
+            } else if(user) {
+                res.send(user);
+                console.log(user);
+            }
+        });
+});
+
 
 router.post('/authenticate', function (req, res) {
     console.log(req.body.username + " " + req.body.password);

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../post.service';
-import { Post } from '../post';
+import { PostService } from '../../services/post.service';
+import { Post } from '../../post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { routerTransition } from '../animations';
-import { AuthService } from '../services/auth.service';
+import { routerTransition } from '../../animations';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-post',

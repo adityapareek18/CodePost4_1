@@ -1,0 +1,123 @@
+$bg: #2A3136;
+$text-color: #88949D;
+$accent-color: #00E4AC;
+
+label {
+    color:$accent-color;
+    font-size:1.5em;
+}
+
+input[type='text'],textarea, input[type='time'] {
+    background:none;
+    border: 1px solid #617879;
+    color:$text-color;
+}
+
+textarea {
+    min-height:70px;
+}
+
+.filled {
+    background:$accent-color;
+    color:$bg;
+    float:left;
+    text-transform:uppercase;
+    font-family:'Raleway';
+    font-weight:700;
+    padding: 12px 22px;
+    margin-top:40px;
+}
+
+.alert {
+    margin: -5px 0 20px 0;
+}
+
+.card-img-top {
+    width: 100%;
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+}
+
+.bio-image{
+    margin: -100px 0 0 40px;
+}
+.bio-image img{
+    width: 200px;
+    height: 200px;
+    border-radius:50%;
+}
+
+.company-link {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    background: 0 0;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.company-link-logo-img {
+    max-height: 32px;
+    max-width: 32px;
+}
+
+.Photo-square-5 {
+    width: 72px;
+    height: 72px;
+    border-radius: 6px;
+}
+
+.m8 {
+    margin-left: 8px;
+}
+
+.t-bold {
+    font-weight: 600;
+}
+
+.t-black {
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.t-24 {
+    font-size: 2.4rem;
+    line-height: 1.33333;
+}
+
+.about {
+    border-top: 1px #cdcfd2 solid;
+    font-size: 1.2rem;
+}
+
+.m16 {
+    margin-top: 16px;
+}
+
+h1, h2, h3, h4, h5, p {
+    font-weight: 400;
+    color: rgba(0,0,0,.9);
+}
+
+.pill-button {
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 50px;
+  }
+
+  .circle-button {
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 100%;
+  }

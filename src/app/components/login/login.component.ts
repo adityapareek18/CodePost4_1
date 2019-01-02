@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { routerTransition} from '../animations';
+import { routerTransition} from '../../animations';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserService } from '../services/user.service';
-import { AuthService } from '../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { User } from '../user';
-import * as moment from '../../../node_modules/moment';
+import { User } from '../../user';
+import * as moment from '../../../../node_modules/moment';
 
 @Component({
     selector: 'app-login',

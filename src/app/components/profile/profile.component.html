@@ -1,0 +1,46 @@
+<div class="container">
+        <img class="card-img-top" src="../../../assets/images/coverphoto.svg" alt="Card image cap">
+        <div class="card">
+            <div class="bio-image">
+                <img src="../../../assets/images/profilePic.jpg" alt="image">
+            </div>
+            <div class="container">
+              <div class="d-flex justify-content-between">
+                <div class="col-md-4">
+                  <h3 class="t-black t-bold t-24">Tejashwi Sharma</h3>
+                  <h4 class="t-black">Software Developer</h4>
+                </div>
+                <div class="col-md-3">
+                    <button class="company-link">
+                        <img src="https://media.licdn.com/dms/image/C4E0BAQGUZEEE4KYkhA/company-logo_400_400/0?e=1554336000&amp;v=beta&amp;t=8i6pBZceK1XOs4GeH2lPuYLnEjx4x5wyN38pWHPC0cs" class="company-link-logo-img Photo-square-5">
+                          <span id="ember78" class="m8 t-bold t-black">  CXC Solutions
+                          </span>
+                    </button>
+                </div>
+              </div>
+              <div class="about mt16">
+                <p class="m16">Have a broad skill set of of responsive front-end development in Angular 4/5, developing and maintaining REST APIs, writing clean, robust and high performance back-end/business logic in Java, Scala and JS. While working as an application Developer, I've constantly thrived to get my hands in other exciting technologies, while spending my creative energy mostly in Web, Desktop and Hybrid mobile app development, I Also have a hand in data engineering using Hadoop based technologies. Currently pursuing research and training to develop, construct, test and maintain big data architectures such as databases and large-scale data processing systems.</p>
+              </div>
+                
+            </div>
+        </div>
+        <div class="card" style="margin-top: 20px;">
+            <div class="card-body">
+              <h5 class="card-title">Stuff I know:</h5>
+              <div class="row justify-content-between">
+                  <div>
+                      <button *ngFor="let stuff of stuffs" class="pill-button btn-primary">{{stuff}}</button>
+                  </div> 
+                  <button class="circle-button">+</button>            
+              </div>
+              <div class="m16">
+                <h5 class="card-title">Stuff I want to know:</h5>
+                <div class="row justify-content-between">
+                  <div>
+                      <button *ngFor="let stuff of stuffs" class="pill-button btn-primary"><i class="fas fa-ad"></i>{{stuff}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+</div>
