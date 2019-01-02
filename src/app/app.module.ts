@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostService } from './services/post.service';
@@ -26,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SessionTimePipe } from '../app/pipes/time.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FillProfileComponent } from './components/fillProfile/fillProfile.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -52,6 +52,7 @@ import { FillProfileComponent } from './components/fillProfile/fillProfile.compo
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatAutocompleteModule,
     NgbModule.forRoot()
   ],
   providers: [PostService, UserService, AuthService, LoggedInUsersGuard, {

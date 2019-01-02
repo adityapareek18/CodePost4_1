@@ -3,7 +3,11 @@ import {User} from '../../models/user';
 import {Profile} from '../../models/profile';
 import { AuthService } from 'app/services/auth.service';
 import { UserService } from 'app/services/user.service';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import {startWith} from 'rxjs/operators/startWith';
+import {map} from 'rxjs/operators/map';
+import {filter} from 'rxjs/operators/filter';
 
 @Component({
     selector: 'fill-Profile',
@@ -13,18 +17,21 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 export class FillProfileComponent implements OnInit {
 
-    user: User;
+    user: User = new User();
     skillsKnown: Array<String>;
     profileForm: FormGroup;
     profile: Profile;
-    skills: Array<String> = [];
+    skills = ['Spring', 'Hibernate', 'Elastic Search', 'Lucene', 'Solr'];
+    knownSkills: Array<String> = [];
+    wantSkills: Array<String> = [];
+    filteredOptions: String[];
 
     constructor(private _authService: AuthService, private _userService: UserService, fb: FormBuilder) {
         this.profileForm = fb.group({
             'bio' : [null, Validators.required],
             'about' : [null, Validators.required],
-            'skillKnown' : [null, Validators.required],
-            'skillWant' : [null, Validators.required],
+            'knownSkill' : [null],
+            'wantSkill' : [null],
         });
     }
     saveProfile() {
@@ -34,16 +41,22 @@ export class FillProfileComponent implements OnInit {
     ngOnInit() {
         this._userService.getUserById(this._authService.getLoggedInUserId())
         .subscribe(res => this.user = res);
-        this.populateSkills();
     }
 
-    populateSkills() {
-        this.skills[0] = "Elastic Search";
-        this.skills[1] = "Java 8";
-        this.skills[2] = "Hibernate";
-        this.skills[3] = "Multithreading in Java";
-        this.skills[4] = "Something";
-        this.skills[5] = "Elastic";
+    filterSkills() {
+        var value = this.profileForm.get('knownSkill').value;
+        this.filteredOptions =
+        value.length >= 1 ? this.filter(value): [];
+    }
 
+    filter(val: String): String[] {
+        return this.skills.filter(option =>
+          option.toLowerCase().indexOf(val.toLowerCase()) === 0);
+    }
+
+    addSkill() {
+        var value = this.profileForm.get('knownSkill').value; 
+        this.knownSkills.push(value);
+        this.profileForm.get('knownSkill').setValue("");
     }
 }
