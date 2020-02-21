@@ -1,29 +1,34 @@
-import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
-import { User } from '../user';
-import * as moment from '../../../node_modules/moment';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {User} from '../user';
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class UserService {
 
-    constructor(private _http: Http){}
-    result: any;
+  result: any;
 
-    getUsers() {
-        return this._http.get("/api/users")
-          .map(result => this.result = result.json());
-      }
-    
-    createUser(user: User){
-        let headers = new Headers({ 'Content-Type': 'application/json'});
-        let options = new RequestOptions({ headers: headers });
-        return this._http.post('/api/users', JSON.stringify(user), options)
-            .map(user => this.result = user.json());
-    }
+  constructor(private httpClient: HttpClient) {
+  }
 
-    getUserById(id: String) {
-        return this._http.get("/api/users/"+id)
-            .map(result => this.result = result.json());
-    }
+  getUsers(): Observable<HttpResponse<User[]>>  {
+    return this.httpClient.get('/api/users')
+      .map((result: HttpResponse<any>) => result.body);
+  }
+
+  createUser(user: User) {
+    const registerUser = environment.apiRoot + environment.users;
+    return this.httpClient.post(registerUser, user, {observe: 'response'})
+      .map((response: HttpResponse<any>) => response.body)
+      .catch((err: HttpErrorResponse) => {
+        return Observable.throwError(err);
+      });
+  }
+
+  getUserById(id: String) {
+    return this.httpClient.get('/api/users/' + id)
+      .map(result => this.result = result);
+  }
 }

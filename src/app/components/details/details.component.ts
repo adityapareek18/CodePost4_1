@@ -25,15 +25,14 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe((params) => {
 
-      let id = params['id'];
+      const id = params['id'];
 
       this._postService.getPost(id)
         .subscribe(res => {
           this.post = res;
-          var date1: any = this.post.startDate;
+          const date1: any = this.post.startDate;
           this.date = new Date(date1.year, date1.month, date1.day);
         });
-        
     })
   }
 }

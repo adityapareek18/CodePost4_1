@@ -1,34 +1,39 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
-import { Post } from '../post';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Post} from '../post';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class PostService {
 
-  result:any;
+  result: any;
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {
+  }
 
   getPosts() {
-    return this._http.get<Post[]>("/api/posts");
+    return this._http.get<Post[]>('/api/posts');
   }
 
   getPostsByUserId(userId) {
-    return this._http.get<Post[]>("/api/posts/"+userId, {observe: 'body'});
+    const posts = environment.apiRoot + environment.posts;
+    return this._http.get<Post[]>(posts + '/' + userId, {observe: 'body'});
   }
 
   getPost(id) {
-    return this._http.get<Post>("/api/details/"+id, {observe: 'body'});
-    }
+    const postDetails = environment.apiRoot + environment.details;
+    return this._http.get<Post>(postDetails + '/' + id, {observe: 'body'});
+  }
 
   insertPost(post: Post) {
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-    return this._http.post<Post>('/api/posts', JSON.stringify(post), { headers, observe: 'body' });
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const posts = environment.apiRoot + environment.posts;
+    return this._http.post<Post>(posts, JSON.stringify(post), {headers, observe: 'body'});
   }
 
   deletePost(id) {
-    return this._http.delete("/api/posts/"+id, {observe: 'response'});
+    const posts = environment.apiRoot + environment.posts;
+    return this._http.delete(posts + '/' + id, {observe: 'response'});
   }
 }

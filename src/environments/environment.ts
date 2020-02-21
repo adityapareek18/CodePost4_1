@@ -5,6 +5,11 @@
 
 export const environment = {
   production: false,
+  apiRoot: 'http://localhost:3000/api/',
+  authenticate: 'authenticate',
+  users: 'users',
+  posts: 'posts',
+  details: 'details',
   auth0: {
     domain: 'aditya7.auth0.com',
     clientId: '2SoUJgdbJ7Glm4agKOF32mStfdd3q6Hs',

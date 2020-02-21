@@ -26,6 +26,7 @@ import { SessionTimePipe } from '../app/pipes/time.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FillProfileComponent } from './components/fillProfile/fillProfile.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {CodepostService} from './services/codepost.service';
 
 
 @NgModule({
@@ -48,14 +49,13 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     HttpClientModule,
     BrowserModule,
     FormsModule,
-    HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
     NgbModule.forRoot()
   ],
-  providers: [PostService, UserService, AuthService, LoggedInUsersGuard, {
+  providers: [PostService, UserService, AuthService, LoggedInUsersGuard, CodepostService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true

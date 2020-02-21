@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: 'post', component: PostComponent, canActivate: [LoggedInUsersGuard] },
   {path: 'register', component: RegisterComponent },
   {path: 'profile', component: ProfileComponent},
-  {path: 'fillprofile', component: FillProfileComponent}
+  {path: 'fillProfile', component: FillProfileComponent}
 ];
 
 @NgModule({

@@ -1,45 +1,43 @@
-import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
-import { User } from '../user';
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {User} from '../user';
 import * as moment from '../../../node_modules/moment';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import 'rxjs/add/observable/of';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
 
-    constructor(private _http: HttpClient) { }
-    result: any;
+  @Output() loginEvent: EventEmitter<any> = new EventEmitter();
+  @Output() logoutEvent: EventEmitter<any> = new EventEmitter();
 
-    loginUser(user: User) {
-        return this._http.post("/api/authenticate", { username: user.username, password: user.password },
-            { observe: 'response' });
-    }
+  constructor(private _http: HttpClient) {
+  }
 
-    logout() {
-        localStorage.removeItem("id_token");
-    }
+  loginUser(user: User) {
+    const loginUserUri = environment.apiRoot + environment.authenticate;
+    return this._http.post(loginUserUri, {username: user.username, password: user.password});
+  }
 
-    public isLoggedIn() {
-        //console.log("loggedin"+" "+moment().isBefore(this.getExpiration()));
-        //return moment().isBefore(this.getExpiration());
-        return (localStorage.getItem("id_token") != 'undefined' && localStorage.getItem("id_token") != null);
-    }
+  logout() {
+    localStorage.removeItem('id_token');
+  }
 
-    isLoggedOut() {
-        return !this.isLoggedIn();
-    }
+  isLoggedIn() {
+    return !!localStorage.getItem('id_token');
+  }
 
-    getExpiration() {
-        const expiration = localStorage.getItem("expires_at");
-        const expiresAt = JSON.parse(expiration);
-        return moment(expiresAt);
-    }
+  getExpiration() {
+    const expiration = localStorage.getItem('expires_at');
+    const expiresAt = JSON.parse(expiration);
+    return moment(expiresAt);
+  }
 
-    getLoggedInUserId() {
-        var token = localStorage.getItem("id_token");
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace('-', '+').replace('_', '/');
-        var tokenObj = JSON.parse(window.atob(base64));
-        return tokenObj._id;
-    }
+  getLoggedInUserId() {
+    const token = localStorage.getItem('id_token');
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
+    const tokenObj = JSON.parse(window.atob(base64));
+    return tokenObj._id;
+  }
 }

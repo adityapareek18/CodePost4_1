@@ -1,54 +1,57 @@
 <div class="container">
-    <h2>Hi {{user.username}}, Welcome to codepost!</h2>
-    <h2>Let's setup your profile first.</h2>
-    <form [formGroup]="profileForm" (ngSubmit)="saveProfile(profileForm.value)">
-        <div class="container" style="margin-top: 20px;">
-            <div class="form-group row">
-                <label class="col-md-4 col-form-label">Describe yourself in one line</label>
-                <input type="text" class="col-md-4 form-control" name="bio" [formControl]="profileForm.controls['bio']">
-            </div>
-            <div class="form-group row">
-                <label class="col-md-4 col-form-label">Describe yourself in one paragraph</label>
-                <textarea class="col-md-4 form-control" rows = "5" cols = "50" name = "about" [formControl]="profileForm.controls['about']">
+  <h2>Hi {{user.username}}, Welcome to codepost!</h2>
+  <h2>Let's setup your profile first.</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="saveProfile(profileForm.value)">
+    <div class="container" style="margin-top: 20px;">
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label">Describe yourself in one line</label>
+        <input type="text" class="col-md-4 form-control" name="bio" [formControl]="profileForm.controls['bio']">
+      </div>
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label">Describe yourself in one paragraph</label>
+        <textarea class="col-md-4 form-control" rows="5" cols="50" name="about"
+                  [formControl]="profileForm.controls['about']">
                 </textarea>
-            </div>
-            <!-- Knows -->
-            <div class="form-group row">
-                <label class="col-md-4 col-form-label">Add Your Skills</label>
-                <input type="text" class="col-md-4 form-control" name="skillKnown" matInput [formControl]="profileForm.controls['knownSkill']" [matAutocomplete]="auto" 
-                    (keyup)="filterSkills()">
-            </div>
+      </div>
+      <!-- Knows -->
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label">Add Your Skills</label>
+        <input type="text" class="col-md-4 form-control" name="skillKnown" matInput
+               [formControl]="profileForm.controls['knownSkill']" [matAutocomplete]="auto"
+               (keyup)="filterSkills()">
+      </div>
 
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                    <mat-option *ngFor="let skill of filteredOptions" [value]="skill" (click)="addSkill()">
-                        {{skill}}
-                    </mat-option>
-            </mat-autocomplete>
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let skill of filteredOptions" [value]="skill" (click)="addSkill()">
+          {{skill}}
+        </mat-option>
+      </mat-autocomplete>
 
-            <div class="row justify-content-between">
-                <div>
-                    <button *ngFor="let stuff of knownSkills" class="pill-button btn-primary">{{stuff}}</button>
-                </div> 
-            </div>
-            <!-- Want to learn-->
-
-            <div class="form-group row">
-                    <label class="col-md-4 col-form-label">Add Skills you wish to learn</label>
-                    <input type="text" class="col-md-4 form-control" name="skillWant" matInput [formControl]="profileForm.controls['wantSkill']" [matAutocomplete]="auto" 
-                        (keyup)="filterSkills()">
-                </div>
-    
-                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let skill of filteredOptions" [value]="skill" (click)="addSkill()">
-                            {{skill}}
-                        </mat-option>
-                </mat-autocomplete>
-    
-                <div class="row justify-content-between">
-                    <div>
-                        <button *ngFor="let stuff of wantSkills" class="pill-button btn-primary">{{stuff}}</button>
-                    </div> 
-                </div>
+      <div class="row justify-content-between">
+        <div>
+          <span (click)="removeSkill(stuff)" *ngFor="let stuff of knownSkills" class="pill-button btn-primary">{{stuff}}</span>
         </div>
-    </form>
+      </div>
+      <!-- Want to learn-->
+
+      <div class="form-group row">
+        <label class="col-md-4 col-form-label">Add Skills you wish to learn</label>
+        <input type="text" class="col-md-4 form-control" name="skillWant" matInput
+               [formControl]="profileForm.controls['wantSkill']" [matAutocomplete]="auto"
+               (keyup)="filterSkills()">
+      </div>
+
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let skill of filteredOptions" [value]="skill" (click)="addSkill()">
+          {{skill}}
+        </mat-option>
+      </mat-autocomplete>
+
+      <div class="row justify-content-between">
+        <div>
+          <button *ngFor="let stuff of wantSkills" class="pill-button btn-primary">{{stuff}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>

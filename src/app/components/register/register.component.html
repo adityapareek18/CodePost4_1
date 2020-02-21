@@ -14,7 +14,7 @@
       </div>
       <div class="form-group row">
         <label class="col-md-2 col-form-label">Username</label>
-        <input type="text" class="col-md-4 form-control">
+        <input type="text" class="col-md-4 form-control" [formControl]="registerForm.controls['username']">
       </div>
         <!--<div class="col-md-4">
           <small class="form-text text-muted" *ngIf="usernameTaken(username.value)">Username already taken.</small>
